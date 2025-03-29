@@ -36,7 +36,7 @@ class NavigatorBar extends StatefulWidget {
 
 class _NavigatorBarState extends State<NavigatorBar> {
   int _selectedIndex = 0;
-  
+
   //the order of the screens
   final List<Widget> _screens = [
     const WelcomeScreen(),
@@ -210,7 +210,9 @@ class Helpscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Instruction', style: TextStyle(color: Colors.white, fontSize: 23)),
+        centerTitle: true,
+        title: const Text('Instruction', 
+          style: TextStyle(color: Colors.white, fontSize: 23)),
         backgroundColor: Color(0xFF461D7C),
       ),
       backgroundColor: Color(0xFF461D7C),
