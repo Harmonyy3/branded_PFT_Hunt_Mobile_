@@ -32,7 +32,7 @@ class _NavigatorBarState extends State<NavigatorBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined, color: Color(0xFF461D7C)),
+            icon: Icon(Icons.home_outlined, color: Color(0xFF461D7C)),
             label: 'Home',
           ),
           BottomNavigationBarItem(

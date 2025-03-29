@@ -55,7 +55,7 @@ class Mapscreen extends StatelessWidget {
             context: context,
             title: 'First Floor',
             image: 'assets/map1.png',
-            description: 'Main entrance and common areas',
+            description: 'Cambre Atrium and Capstone Gallery',
           ),
           
           const SizedBox(height: 16),
@@ -65,7 +65,7 @@ class Mapscreen extends StatelessWidget {
             context: context,
             title: 'Second Floor',
             image: 'assets/map2.png',
-            description: 'Classrooms and study areas',
+            description: 'Bim Lab and Civil Engineering Simulation Lab',
           ),
           
           const SizedBox(height: 16),
@@ -75,7 +75,7 @@ class Mapscreen extends StatelessWidget {
             context: context,
             title: 'Third Floor',
             image: 'assets/map3.png',
-            description: 'Offices and research facilities',
+            description: 'Department Suites and Veranda',
           ),
         ],
       ),

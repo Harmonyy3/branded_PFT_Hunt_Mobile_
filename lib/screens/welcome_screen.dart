@@ -12,6 +12,15 @@ class WelcomeScreen extends StatelessWidget {
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 23),
         centerTitle: true,
         backgroundColor: Color(0xFF461D7C),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person, color: Colors.white),
+            onPressed: () {
+              // TODO: Navigate to profile screen
+            },
+          ),
+          const SizedBox(width: 8),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
