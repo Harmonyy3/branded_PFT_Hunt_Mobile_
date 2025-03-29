@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:logging/logging.dart';
 //import 'package:audioplayers/audioplayers.dart';
 
+final _logger = Logger('QuizScreen');
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +26,57 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//navigation bar through the app
+class NavigatorBar extends StatefulWidget {
+  const NavigatorBar({super.key});
+
+  @override
+  State<NavigatorBar> createState() => _NavigatorBarState();
+}
+
+class _NavigatorBarState extends State<NavigatorBar> {
+  int _selectedIndex = 0;
+  
+  //the order of the screens
+  final List<Widget> _screens = [
+    const WelcomeScreen(),
+    const Mapscreen(),
+    const Helpscreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu_book_outlined, color: Color(0xFF461D7C)),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map, color: Color(0xFF461D7C)),
+            label: 'PFT Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help_outline, color: Color(0xFF461D7C)),
+            label: 'Instruction',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Color(0xFF461D7C),
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -36,11 +89,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-  // Navigate to WelcomeScreen after 2 seconds
+    // Navigate to NavigatorBar after 2 seconds
     Future.delayed(const Duration(seconds: 2), () {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+        MaterialPageRoute(builder: (context) => const NavigatorBar()),
       );
     });
   }
@@ -68,43 +122,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-// Welcome Screen
-class WelcomeScreen extends StatefulWidget {
+// home Screen
+class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
-
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
-
-class _WelcomeScreenState extends State<WelcomeScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    
-    switch (index) {
-      case 0:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Mapscreen()),
-        );
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const Helpscreen()),
-        );
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Guest'),
+        title: const Text('Guest', style: TextStyle(color: Colors.white, fontSize: 23)),
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 23),
         centerTitle: true,
         backgroundColor: Color(0xFF461D7C),
@@ -169,96 +195,136 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
               ),
-
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map, color: Color(0xFF461D7C)),
-            label: 'PFT Map',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help_outline, color: Color(0xFF461D7C)),
-            label: 'Instruction',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined, color: Color(0xFF461D7C)),
-            label: 'Menu',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor:Color(0xFF461D7C),
-        onTap: _onItemTapped,
       ),
     );
   }
 }
 
-class Helpscreen extends StatelessWidget{
+class Helpscreen extends StatelessWidget {
+  const Helpscreen({super.key});
 
-    const Helpscreen({super.key});
-
-    @override
-    Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Instruction')),
+      appBar: AppBar(
+        title: const Text('Instruction', style: TextStyle(color: Colors.white, fontSize: 23)),
+        backgroundColor: Color(0xFF461D7C),
+      ),
       backgroundColor: Color(0xFF461D7C),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),  
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,  
-          children: const [
-            Text(
-              'Welcome to the game! \nHere are some instructions to get you started:',
-              style: TextStyle(
-                fontSize: 30, 
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+      body: ListView(
+        padding: const EdgeInsets.all(16.0),
+        children: [
+          // Welcome Card
+          Card(
+            elevation: 8,
+            color: Colors.white.withOpacity(0.1),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: const [
+                  Icon(Icons.emoji_events, color: Colors.amber, size: 48),
+                  SizedBox(height: 8),
+                  Text(
+                    'Welcome Tigers!',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 20),
-            Text(
-              '1. Time limits is 10 seconds per level once you start the hunt.',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
+          ),
+          
+          const SizedBox(height: 16),
+          
+          // Instruction Cards
+          _buildInstructionCard(
+            icon: Icons.timer,
+            title: 'Time Limit',
+            description: '10 seconds per level to find the object',
+          ),
+          _buildInstructionCard(
+            icon: Icons.stars,
+            title: 'Scoring',
+            description: 'Win 10 points for each found object\nPerfect score is 100',
+          ),
+          _buildInstructionCard(
+            icon: Icons.volume_up,
+            title: 'Sound Feedback',
+            description: 'Listen for sound cues to know if you found the right object',
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // Good Luck Card
+          Card(
+            elevation: 8,
+            color: Colors.white.withOpacity(0.1),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: const [
+                  Icon(Icons.favorite, color: Color.fromARGB(255, 234, 106, 149)),
+                  SizedBox(height: 8),
+                  Text(
+                    'Good luck and have fun, Tigers!',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontStyle: FontStyle.italic,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 8),
-            Text(
-              '2. You will win 10 scores if you find the hidden object.',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 8),
+          ),
+        ],
+      ),
+    );
+  }
 
-            Text(
-              '3. The sound will tell if it the correct object.',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              '4. Perfect score is 100!',
-              style: TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Good luck and have fun!',
-              style: TextStyle(
-                fontSize: 25, 
-                fontStyle: FontStyle.italic,
-                color: Colors.white,
+  Widget _buildInstructionCard({
+    required IconData icon,
+    required String title,
+    required String description,
+  }) {
+    return Card(
+      elevation: 4,
+      margin: const EdgeInsets.only(bottom: 16),
+      color: Colors.white.withOpacity(0.1),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Icon(icon, color: Colors.white, size: 32),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    description,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -272,22 +338,200 @@ class Helpscreen extends StatelessWidget{
 
 
 //map
-class Mapscreen extends StatelessWidget{
+class Mapscreen extends StatelessWidget {
   const Mapscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('PFT Map')),
+      appBar: AppBar(
+        title: const Text('PFT Map', style: TextStyle(color: Colors.white, fontSize: 23)),
+        backgroundColor: Color(0xFF461D7C),
+        centerTitle: true,
+      ),
+      backgroundColor: Color(0xFF461D7C),
       body: ListView(
+        padding: const EdgeInsets.all(16.0),
         children: [
-          Image.asset("assets/map1.png", fit: BoxFit.contain),
-          Image.asset("assets/map2.png", fit: BoxFit.contain),
-          Image.asset("assets/map3.png", fit: BoxFit.contain),
+          // Header Card
+          Card(
+            elevation: 8,
+            color: Colors.white.withOpacity(0.1),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: const [
+                  Icon(Icons.map_outlined, color: Colors.white, size: 48),
+                  SizedBox(height: 8),
+                  Text(
+                    'PFT Building Layout',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'Explore different floors of the PFT building',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          
+          const SizedBox(height: 24),
+          
+          // First Floor Map
+          _buildMapSection(
+            context: context,
+            title: 'First Floor',
+            image: 'assets/map1.png',
+            description: 'Main entrance and common areas',
+          ),
+          
+          const SizedBox(height: 16),
+          
+          // Second Floor Map
+          _buildMapSection(
+            context: context,
+            title: 'Second Floor',
+            image: 'assets/map2.png',
+            description: 'Classrooms and study areas',
+          ),
+          
+          const SizedBox(height: 16),
+          
+          // Third Floor Map
+          _buildMapSection(
+            context: context,
+            title: 'Third Floor',
+            image: 'assets/map3.png',
+            description: 'Offices and research facilities',
+          ),
         ],
-        ),
+      ),
     );
-}
+  }
+
+  Widget _buildMapSection({
+    required BuildContext context,
+    required String title,
+    required String image,
+    required String description,
+  }) {
+    return Card(
+      elevation: 4,
+      color: Colors.white.withOpacity(0.1),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  description,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          GestureDetector(
+            onTap: () => _showFullImage(context, image, title),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(4),
+                bottomRight: Radius.circular(4),
+              ),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    image,
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                  ),
+                  Positioned(
+                    right: 8,
+                    bottom: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(
+                        Icons.fullscreen,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showFullImage(BuildContext context, String imagePath, String title) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          child: Stack(
+            children: [
+              // Full-screen image
+              InteractiveViewer(
+                minScale: 0.5,
+                maxScale: 4.0,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              // Close button
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
 
@@ -455,7 +699,7 @@ class QuizScreen extends StatefulWidget
       RenderBox? renderBox = targetKey.currentContext?.findRenderObject() as RenderBox?;
       if (renderBox != null) {
         Offset position = renderBox.localToGlobal(Offset.zero);
-        print('Target position: left: ${position.dx}, top: ${position.dy}');
+        _logger.info('Target position: left: ${position.dx}, top: ${position.dy}');
       }
     }
   }
@@ -470,7 +714,7 @@ class QuizScreen extends StatefulWidget
     } else {
       //playSound('sounds/wrong.mp3'); 
     }
-    print("Score: $newScore");
+    _logger.info("Score: $newScore");
     await Future.delayed(Duration(seconds: 2)); // Delay for sound to play
 
     if (!mounted) return; // Check if the widget is still mounted
@@ -525,7 +769,7 @@ class QuizScreen extends StatefulWidget
             right: 20,
             child: Container(
               padding: const EdgeInsets.all(10),
-              color: Colors.black54,
+              color: Colors.black.withOpacity(0.5),
               child: Text(
                 "${questionData["question"]} (⏳ $timeLeft sec)",
                 style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
