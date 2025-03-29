@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'intro_screen.dart';
+import 'profile_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -16,7 +17,10 @@ class WelcomeScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.person, color: Colors.white),
             onPressed: () {
-              // TODO: Navigate to profile screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
             },
           ),
           const SizedBox(width: 8),
@@ -25,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/lsu1.jpg"),
+            image: AssetImage("assets/pft.png"),
             fit: BoxFit.cover,
           ),
         ),
@@ -34,7 +38,7 @@ class WelcomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "PFT Scavenger Hunt:\nFind the Object!",
+                "PFT Scavenger Hunt:\nFind the Object",
                 style: TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
@@ -76,31 +80,11 @@ class WelcomeScreen extends StatelessWidget {
                   foregroundColor: Colors.white,
                 ),
                 child: const Text(
-                  "Level",
+                  "Score",
                   style: TextStyle(
                     fontSize: 25,
                   ),
                   ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const IntroScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  backgroundColor: Color(0xFF461D7C),
-                  foregroundColor: Colors.white,
-                ),
-                child: const Text(
-                  "Level",
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
               ),
             ],
           ),

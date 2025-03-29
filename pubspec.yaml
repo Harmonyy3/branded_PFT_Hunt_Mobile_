@@ -103,6 +103,12 @@ flutter:
 
     - assets/lsu_oak_cropped.png
 
+    - assets/tiger.png
+
+    - assets/pft.png
+
+    - assets/pftt.png
+
     - assets/sounds/correct.mp3
 
     - assets/sounds/wrong.mp3
