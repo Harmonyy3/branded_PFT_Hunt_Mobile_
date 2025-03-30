@@ -84,10 +84,24 @@ flutter:
     - assets/tiger.png
     - assets/pft.png
     - assets/pftt.png
+    - assets/basf.jpg
+    - assets/civillab.jpg
+    - assets/robotics.jpg
+    - assets/proto.jpg
     - assets/sounds/correct.mp3
     - assets/sounds/wrong.mp3
-    - assets/audio/
-
+    - assets/sounds/stop1-welcome-the-capstone-gallery.mp3
+    - assets/sounds/stop2-the-cambre-atrium.mp3
+    - assets/sounds/stop3-dow-chemical-unit-operations-laboratory.mp3
+    - assets/sounds/stop4-the-basf-sustainable-living-laboratory.mp3
+    - assets/sounds/stop7-civil-engineering-laboratories.mp3
+    - assets/sounds/stop8-robotics-laboratory.mp3
+    - assets/sounds/stop10-mmr-building-information-modeling-laboratory.mp3
+    - assets/sounds/stop11-mark-and-carolyn-guidry-electrical-engineering-laboratory-duplex.mp3
+    - assets/sounds/stop12a-engineering-annex-intro.mp3
+    - assets/sounds/stop13-civilengineering-driving-simulator-laboratory.mp3
+    - assets/sounds/stop14-thedr.william-a-brookshire-student-services-suite.mp3
+    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 

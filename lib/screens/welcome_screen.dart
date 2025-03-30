@@ -3,7 +3,6 @@ import 'package:flutter_application_1/screens/audio_screen.dart';
 import 'intro_screen.dart';
 import 'profile_screen.dart';
 import 'score_screen.dart';
-import 'audio_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
