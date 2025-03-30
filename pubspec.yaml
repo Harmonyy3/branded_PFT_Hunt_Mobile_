@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   logging: ^1.2.0
-  #audioplayers: ^4.1.0
+  audioplayers: ^5.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -59,68 +59,34 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-
   assets:
     - assets/pft.jpeg
-
     - assets/lsu.jpeg
-
     - assets/lsu1.jpg
-
     - assets/map.jpeg
-
     - assets/map1.png
-
     - assets/map2.png
-
     - assets/map3.png
-
     - assets/pft1.jpg
-
     - assets/q1.png
-
     - assets/q2.png
-
     - assets/q3.png
-
     - assets/q4.png
-
     - assets/q5.png
-
     - assets/q6.png
-
     - assets/q7.png
-
     - assets/q8.png
-
     - assets/q9.png
-
     - assets/q10.png
-
     - assets/lsu_logo_gold.png
-
     - assets/lsu_logo.png
-
     - assets/lsu_oak_cropped.png
-
     - assets/tiger.png
-
     - assets/pft.png
-
     - assets/pftt.png
-
     - assets/sounds/correct.mp3
-
     - assets/sounds/wrong.mp3
-    
-
-
-
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+    - assets/audio/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
