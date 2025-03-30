@@ -66,7 +66,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
       'title': 'Proto Lab (2272)',
       'description': 'A microprocessor interfacing lab and a proto lab',
       'icon': Icons.school,
-      'audioPath': 'sounds/stop11-mark-and-carolyn-guidry-electrical-engineering-laboratory.mp3',
+      'audioPath': 'sounds/stop11-mark-and-carolyn-guidry-electrical-engineering-laboratory-duplex.mp3',
       'imagePath': 'assets/proto.jpg',
     },
     {
@@ -95,7 +95,7 @@ class _AudioScreenState extends State<AudioScreen> with TickerProviderStateMixin
       'description': 'Guide to student services and amenities',
       'icon': Icons.school,
       'audioPath': 'sounds/stop14-thedr.william-a-brookshire-student-services-suite.mp3',
-      'imagePath': 'assets/p9.png',
+      'imagePath': 'assets/q9.png',
     },  
   ];
 
